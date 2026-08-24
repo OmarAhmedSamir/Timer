@@ -1,100 +1,871 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<meta name="theme-color" content="#09090b" />
-<title>Focus — Pomodoro</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
+
+  <meta name="theme-color" content="#05070c" />
+  <title>RakkeZ — Focus Dashboard</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <div id="bg" class="bg"></div>
-  <video id="bgVideo" class="bg-video" autoplay muted loop playsinline hidden></video>
-  <div class="bg-overlay"></div>
 
-  <header class="topbar">
-    <div class="brand">FOCUS</div>
-    <div class="top-actions">
-      <button class="icon-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">☾</button>
-      <button class="icon-btn" id="settingsBtn" title="Settings" aria-label="Settings">⚙</button>
-    </div>
-  </header>
+  <!-- BACKGROUND -->
+  <div id="background" class="background">
+    <div class="aurora aurora-one"></div>
+    <div class="aurora aurora-two"></div>
+    <div class="aurora aurora-three"></div>
 
-  <main class="container">
-    <section class="hero glass">
-      <div id="mode" class="eyebrow">FOCUS</div>
-      <div id="timer" class="timer">25:00</div>
-      <div id="session" class="session">SESSION 1 / 4</div>
+    <video
+      id="backgroundVideo"
+      class="background-video"
+      muted
+      loop
+      playsinline
+    ></video>
 
-      <div class="actions">
-        <button id="start" class="btn primary">Start</button>
-        <button id="reset" class="btn">Reset</button>
-        <button id="skip" class="btn">Skip</button>
-      </div>
-
-      <div class="track"><div id="timerProgress" class="bar"></div></div>
-    </section>
-
-    <section class="stats">
-      <article class="stat glass"><span>Total Focus Time</span><strong id="focusTime">0m</strong></article>
-      <article class="stat glass"><span>Sessions</span><strong id="sessions">0</strong></article>
-      <article class="stat glass"><span>Streak</span><strong id="streak">0 🔥</strong></article>
-      <article class="stat glass"><span>Daily Goal</span><strong id="goalText">0m / 4h</strong><div class="mini-track"><div id="goalProgress" class="bar"></div></div></article>
-    </section>
-
-    <section id="mediaCard" class="media glass hidden">
-      <div id="mediaThumb" class="media-thumb">♪</div>
-      <div class="media-meta">
-        <span>Currently Playing</span>
-        <strong id="mediaTitle">Media</strong>
-        <small id="mediaSource">—</small>
-      </div>
-    </section>
-  </main>
-
-  <div id="overlay" class="overlay"></div>
-  <aside id="settings" class="drawer">
-    <div class="drawer-head"><h2>Settings</h2><button class="icon-btn" id="closeSettings">×</button></div>
-    <div class="drawer-body">
-      <section><h3>Timer</h3><div class="grid2">
-        <label>Focus (min)<input id="focus" type="number" min="1" max="240"></label>
-        <label>Short break<input id="short" type="number" min="1" max="120"></label>
-        <label>Long break<input id="long" type="number" min="1" max="240"></label>
-        <label>Sessions / cycle<input id="cycle" type="number" min="1" max="20"></label>
-      </div></section>
-      <section><h3>Daily Goal</h3><label>Focus goal (minutes)<input id="dailyGoal" type="number" min="1" max="1440"></label></section>
-      <section><h3>Automation</h3>
-        <label class="toggle"><span>Auto-start breaks</span><input id="autoBreak" type="checkbox"></label>
-        <label class="toggle"><span>Auto-start focus</span><input id="autoFocus" type="checkbox"></label>
-      </section>
-      <section><h3>Sounds</h3>
-        <label class="toggle"><span>Enabled</span><input id="soundEnabled" type="checkbox"></label>
-        <label>Volume<input id="volume" type="range" min="0" max="1" step="0.01"></label>
-        <label>Custom sound URL<input id="soundUrl" type="url" placeholder="Direct .mp3/.wav/.ogg URL"></label>
-        <button class="btn full" id="testSound">Test sound</button>
-      </section>
-      <section><h3>Background</h3>
-        <label>Image URL<input id="imageUrl" type="url" placeholder="https://..."></label>
-        <label>Video URL<input id="videoUrl" type="url" placeholder="https://...mp4"></label>
-        <button class="btn full" id="defaultBg">Use animated gradient</button>
-      </section>
-      <section><h3>Music</h3>
-        <label>Spotify / YouTube URL<input id="mediaUrl" type="url" placeholder="Paste link"></label>
-        <label>Title<input id="mediaTitle" type="text" placeholder="Song / video name"></label>
-        <button class="btn full" id="saveMedia">Save media</button>
-        <p class="hint">A browser page usually cannot read the song playing in another tab. The link/title is therefore saved and shown as the current media.</p>
-      </section>
-      <button class="btn primary full" id="saveSettings">Save settings</button>
-    </div>
-  </aside>
-
-  <div id="resetModal" class="modal hidden">
-    <div class="modal-card glass"><h2>Reset Timer?</h2><p>Your current session progress will be lost.</p><div class="modal-actions"><button id="cancelReset" class="btn">Cancel</button><button id="confirmReset" class="btn primary">Reset</button></div></div>
+    <div class="background-overlay"></div>
   </div>
 
-<script src="app.js"></script>
+
+  <!-- APP -->
+  <div class="app">
+
+    <!-- NAV -->
+    <header class="topbar">
+
+      <button class="logo" id="logoButton">
+        Rakke<span>Z</span>
+      </button>
+
+      <nav class="mode-navigation">
+        <button class="mode-button active" data-mode="home">
+          Home
+        </button>
+
+        <button class="mode-button" data-mode="focus">
+          Focus
+        </button>
+
+        <button class="mode-button" data-mode="ambient">
+          Ambient
+        </button>
+      </nav>
+
+      <div class="top-actions">
+
+        <button
+          class="icon-button"
+          id="themeButton"
+          title="Toggle theme"
+        >
+          ☾
+        </button>
+
+        <button
+          class="icon-button"
+          id="settingsButton"
+          title="Settings"
+        >
+          ⚙
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- HOME -->
+    <main id="homeScreen" class="screen">
+
+      <section class="hero">
+
+        <div class="greeting">
+          <span id="greetingTime">Good morning</span>
+
+          <h1>
+            Make this moment count.
+          </h1>
+        </div>
+
+
+        <!-- TIMER -->
+        <section class="timer-card">
+
+          <div class="timer-meta">
+
+            <span id="timerMode">
+              FOCUS
+            </span>
+
+            <span id="sessionCounter">
+              SESSION 1 / 4
+            </span>
+
+          </div>
+
+
+          <div
+            id="timer"
+            class="timer"
+          >
+            25:00
+          </div>
+
+
+          <div class="timer-progress">
+            <div id="timerProgress"></div>
+          </div>
+
+
+          <div class="timer-controls">
+
+            <button
+              id="startButton"
+              class="primary-button"
+            >
+              Start Focus
+            </button>
+
+            <button
+              id="skipButton"
+              class="secondary-button"
+            >
+              Skip
+            </button>
+
+            <button
+              id="resetButton"
+              class="secondary-button"
+            >
+              Reset
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- QUICK TOOLS -->
+        <section class="quick-tools">
+
+          <button data-panel="tasks">
+            <span>✓</span>
+            Tasks
+          </button>
+
+          <button data-panel="music">
+            <span>♫</span>
+            Music
+          </button>
+
+          <button data-panel="sounds">
+            <span>◌</span>
+            Sounds
+          </button>
+
+          <button data-panel="stats">
+            <span>↗</span>
+            Stats
+          </button>
+
+        </section>
+
+
+        <!-- STATS -->
+        <section class="stats-grid">
+
+          <article class="stat-card">
+            <span>Focus Time</span>
+            <strong id="focusTime">
+              0m
+            </strong>
+          </article>
+
+          <article class="stat-card">
+            <span>Sessions</span>
+            <strong id="totalSessions">
+              0
+            </strong>
+          </article>
+
+          <article class="stat-card">
+            <span>Streak</span>
+            <strong>
+              <span id="streak">
+                0
+              </span>
+              <small>days</small>
+            </strong>
+          </article>
+
+          <article class="stat-card">
+
+            <span>Daily Goal</span>
+
+            <strong id="dailyGoal">
+              0m / 4h
+            </strong>
+
+            <div class="goal-progress">
+              <div id="goalProgress"></div>
+            </div>
+
+          </article>
+
+        </section>
+
+
+        <!-- NOW PLAYING -->
+        <section
+          id="nowPlaying"
+          class="now-playing hidden"
+        >
+
+          <div
+            id="mediaArtwork"
+            class="media-artwork"
+          >
+            ♫
+          </div>
+
+          <div class="media-information">
+
+            <span>
+              NOW PLAYING
+            </span>
+
+            <strong id="mediaTitle">
+              Nothing selected
+            </strong>
+
+            <small id="mediaType">
+              —
+            </small>
+
+          </div>
+
+          <button
+            id="openMedia"
+            class="small-button"
+          >
+            Open
+          </button>
+
+        </section>
+
+      </section>
+
+    </main>
+
+
+    <!-- FOCUS -->
+    <main
+      id="focusScreen"
+      class="screen alternate-screen hidden"
+    >
+
+      <div class="focus-mode">
+
+        <span>
+          DEEP FOCUS
+        </span>
+
+        <div
+          id="focusTimer"
+          class="focus-timer"
+        >
+          25:00
+        </div>
+
+        <p id="currentTask">
+          No task selected
+        </p>
+
+        <div class="timer-controls">
+
+          <button
+            id="focusStartButton"
+            class="primary-button"
+          >
+            Start Focus
+          </button>
+
+          <button
+            id="focusSkipButton"
+            class="secondary-button"
+          >
+            Skip
+          </button>
+
+        </div>
+
+      </div>
+
+    </main>
+
+
+    <!-- AMBIENT -->
+    <main
+      id="ambientScreen"
+      class="screen alternate-screen hidden"
+    >
+
+      <div class="ambient-mode">
+
+        <span>
+          AMBIENT
+        </span>
+
+        <div
+          id="ambientTimer"
+          class="ambient-timer"
+        >
+          25:00
+        </div>
+
+        <p>
+          Stay in the moment.
+        </p>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- SIDE PANEL -->
+  <aside
+    id="sidePanel"
+    class="side-panel"
+  >
+
+    <div class="panel-header">
+
+      <div>
+        <span>RAKKEZ</span>
+        <h2 id="panelTitle">
+          Tasks
+        </h2>
+      </div>
+
+      <button
+        id="closePanel"
+        class="icon-button"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div
+      id="panelContent"
+      class="panel-content"
+    ></div>
+
+  </aside>
+
+
+  <!-- SETTINGS -->
+  <aside
+    id="settingsPanel"
+    class="settings-panel"
+  >
+
+    <div class="panel-header">
+
+      <div>
+        <span>RAKKEZ</span>
+        <h2>Settings</h2>
+      </div>
+
+      <button
+        id="closeSettings"
+        class="icon-button"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="settings-content">
+
+
+      <!-- TIMER -->
+      <section class="settings-section">
+
+        <h3>Timer</h3>
+
+        <div class="input-grid">
+
+          <label>
+            Focus
+
+            <input
+              id="focusDuration"
+              type="number"
+              min="1"
+              max="240"
+            />
+
+            <small>minutes</small>
+          </label>
+
+          <label>
+            Short Break
+
+            <input
+              id="shortBreakDuration"
+              type="number"
+              min="1"
+              max="120"
+            />
+
+            <small>minutes</small>
+          </label>
+
+          <label>
+            Long Break
+
+            <input
+              id="longBreakDuration"
+              type="number"
+              min="1"
+              max="240"
+            />
+
+            <small>minutes</small>
+          </label>
+
+          <label>
+            Sessions
+
+            <input
+              id="sessionCount"
+              type="number"
+              min="1"
+              max="20"
+            />
+
+            <small>per cycle</small>
+          </label>
+
+        </div>
+
+      </section>
+
+
+      <!-- DAILY GOAL -->
+      <section class="settings-section">
+
+        <h3>Daily Goal</h3>
+
+        <label class="full-label">
+
+          Focus minutes per day
+
+          <input
+            id="goalDuration"
+            type="number"
+            min="1"
+            max="1440"
+          />
+
+        </label>
+
+      </section>
+
+
+      <!-- AUTOMATION -->
+      <section class="settings-section">
+
+        <h3>Automation</h3>
+
+        <div class="setting-row">
+
+          <span>
+            Auto-start breaks
+          </span>
+
+          <label class="toggle">
+            <input id="autoBreak" type="checkbox">
+            <span></span>
+          </label>
+
+        </div>
+
+
+        <div class="setting-row">
+
+          <span>
+            Auto-start focus
+          </span>
+
+          <label class="toggle">
+            <input id="autoFocus" type="checkbox">
+            <span></span>
+          </label>
+
+        </div>
+
+
+        <div class="setting-row">
+
+          <span>
+            Notifications
+          </span>
+
+          <label class="toggle">
+            <input id="notifications" type="checkbox">
+            <span></span>
+          </label>
+
+        </div>
+
+      </section>
+
+
+      <!-- APPEARANCE -->
+      <section class="settings-section">
+
+        <h3>Appearance</h3>
+
+        <div class="theme-selector">
+
+          <button
+            data-theme="dark"
+            class="theme-choice"
+          >
+            <span>◐</span>
+            Dark
+          </button>
+
+          <button
+            data-theme="light"
+            class="theme-choice"
+          >
+            <span>☀</span>
+            Light
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- BACKGROUND -->
+      <section class="settings-section">
+
+        <h3>Background</h3>
+
+        <div class="background-selector">
+
+          <button
+            data-background="gradient"
+            class="background-choice"
+          >
+            Black + Blue
+          </button>
+
+          <button
+            data-background="image"
+            class="background-choice"
+          >
+            Image
+          </button>
+
+          <button
+            data-background="video"
+            class="background-choice"
+          >
+            Video
+          </button>
+
+        </div>
+
+
+        <label class="upload-button">
+
+          Upload Image
+
+          <input
+            id="imageUpload"
+            type="file"
+            accept="image/*"
+          />
+
+        </label>
+
+
+        <label class="upload-button">
+
+          Upload Video
+
+          <input
+            id="videoUpload"
+            type="file"
+            accept="video/*"
+          />
+
+        </label>
+
+
+        <label class="full-label">
+
+          Image URL
+
+          <input
+            id="imageURL"
+            type="url"
+            placeholder="https://..."
+          />
+
+        </label>
+
+
+        <label class="full-label">
+
+          Video URL
+
+          <input
+            id="videoURL"
+            type="url"
+            placeholder="https://...mp4"
+          />
+
+        </label>
+
+
+        <button
+          id="defaultBackground"
+          class="secondary-button wide"
+        >
+          Use Black + Blue
+        </button>
+
+      </section>
+
+
+      <!-- SOUNDS -->
+      <section class="settings-section">
+
+        <h3>Sounds</h3>
+
+        <div class="setting-row">
+
+          <span>
+            Completion sound
+          </span>
+
+          <label class="toggle">
+            <input id="soundEnabled" type="checkbox">
+            <span></span>
+          </label>
+
+        </div>
+
+
+        <label class="full-label">
+
+          Volume
+
+          <input
+            id="soundVolume"
+            class="range"
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+          />
+
+        </label>
+
+
+        <label class="upload-button">
+
+          Upload Sound
+
+          <input
+            id="soundUpload"
+            type="file"
+            accept="audio/*"
+          />
+
+        </label>
+
+
+        <label class="full-label">
+
+          Sound URL
+
+          <input
+            id="soundURL"
+            type="url"
+            placeholder="Direct audio URL"
+          />
+
+        </label>
+
+
+        <button
+          id="testSound"
+          class="secondary-button wide"
+        >
+          Test Sound
+        </button>
+
+      </section>
+
+
+      <!-- MUSIC -->
+      <section class="settings-section">
+
+        <h3>Music</h3>
+
+        <label class="full-label">
+
+          YouTube / Spotify
+
+          <input
+            id="musicURL"
+            type="url"
+            placeholder="Paste a link"
+          />
+
+        </label>
+
+
+        <label class="full-label">
+
+          Title
+
+          <input
+            id="musicTitle"
+            type="text"
+            placeholder="Song / Video"
+          />
+
+        </label>
+
+
+        <label class="upload-button">
+
+          Upload Audio / Video
+
+          <input
+            id="mediaUpload"
+            type="file"
+            accept="audio/*,video/*"
+          />
+
+        </label>
+
+
+        <button
+          id="saveMusic"
+          class="primary-button wide"
+        >
+          Save Music
+        </button>
+
+
+        <p class="help-text">
+          YouTube and Spotify links are opened through their
+          official pages. Local media plays directly inside RakkeZ.
+        </p>
+
+      </section>
+
+
+      <!-- RESET -->
+      <section class="settings-section">
+
+        <h3>Data</h3>
+
+        <button
+          id="resetData"
+          class="danger-button wide"
+        >
+          Reset All RakkeZ Data
+        </button>
+
+      </section>
+
+    </div>
+
+  </aside>
+
+
+  <!-- OVERLAY -->
+  <div
+    id="overlay"
+    class="overlay"
+  ></div>
+
+
+  <!-- RESET DIALOG -->
+  <div
+    id="resetDialog"
+    class="dialog hidden"
+  >
+
+    <div class="dialog-card">
+
+      <span>RAKKEZ</span>
+
+      <h2>
+        Reset this session?
+      </h2>
+
+      <p>
+        Your current timer progress will be cleared.
+      </p>
+
+      <div class="dialog-actions">
+
+        <button
+          id="cancelReset"
+          class="secondary-button"
+        >
+          Cancel
+        </button>
+
+        <button
+          id="confirmReset"
+          class="danger-button"
+        >
+          Reset
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <audio
+    id="completionSound"
+    preload="auto"
+  ></audio>
+
+
+  <script src="app.js"></script>
+
 </body>
 </html>
