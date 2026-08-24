@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#09090b" />
+<title>Focus — Pomodoro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="bg" class="bg"></div>
+  <video id="bgVideo" class="bg-video" autoplay muted loop playsinline hidden></video>
+  <div class="bg-overlay"></div>
+
+  <header class="topbar">
+    <div class="brand">FOCUS</div>
+    <div class="top-actions">
+      <button class="icon-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">☾</button>
+      <button class="icon-btn" id="settingsBtn" title="Settings" aria-label="Settings">⚙</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero glass">
+      <div id="mode" class="eyebrow">FOCUS</div>
+      <div id="timer" class="timer">25:00</div>
+      <div id="session" class="session">SESSION 1 / 4</div>
+
+      <div class="actions">
+        <button id="start" class="btn primary">Start</button>
+        <button id="reset" class="btn">Reset</button>
+        <button id="skip" class="btn">Skip</button>
+      </div>
+
+      <div class="track"><div id="timerProgress" class="bar"></div></div>
+    </section>
+
+    <section class="stats">
+      <article class="stat glass"><span>Total Focus Time</span><strong id="focusTime">0m</strong></article>
+      <article class="stat glass"><span>Sessions</span><strong id="sessions">0</strong></article>
+      <article class="stat glass"><span>Streak</span><strong id="streak">0 🔥</strong></article>
+      <article class="stat glass"><span>Daily Goal</span><strong id="goalText">0m / 4h</strong><div class="mini-track"><div id="goalProgress" class="bar"></div></div></article>
+    </section>
+
+    <section id="mediaCard" class="media glass hidden">
+      <div id="mediaThumb" class="media-thumb">♪</div>
+      <div class="media-meta">
+        <span>Currently Playing</span>
+        <strong id="mediaTitle">Media</strong>
+        <small id="mediaSource">—</small>
+      </div>
+    </section>
+  </main>
+
+  <div id="overlay" class="overlay"></div>
+  <aside id="settings" class="drawer">
+    <div class="drawer-head"><h2>Settings</h2><button class="icon-btn" id="closeSettings">×</button></div>
+    <div class="drawer-body">
+      <section><h3>Timer</h3><div class="grid2">
+        <label>Focus (min)<input id="focus" type="number" min="1" max="240"></label>
+        <label>Short break<input id="short" type="number" min="1" max="120"></label>
+        <label>Long break<input id="long" type="number" min="1" max="240"></label>
+        <label>Sessions / cycle<input id="cycle" type="number" min="1" max="20"></label>
+      </div></section>
+      <section><h3>Daily Goal</h3><label>Focus goal (minutes)<input id="dailyGoal" type="number" min="1" max="1440"></label></section>
+      <section><h3>Automation</h3>
+        <label class="toggle"><span>Auto-start breaks</span><input id="autoBreak" type="checkbox"></label>
+        <label class="toggle"><span>Auto-start focus</span><input id="autoFocus" type="checkbox"></label>
+      </section>
+      <section><h3>Sounds</h3>
+        <label class="toggle"><span>Enabled</span><input id="soundEnabled" type="checkbox"></label>
+        <label>Volume<input id="volume" type="range" min="0" max="1" step="0.01"></label>
+        <label>Custom sound URL<input id="soundUrl" type="url" placeholder="Direct .mp3/.wav/.ogg URL"></label>
+        <button class="btn full" id="testSound">Test sound</button>
+      </section>
+      <section><h3>Background</h3>
+        <label>Image URL<input id="imageUrl" type="url" placeholder="https://..."></label>
+        <label>Video URL<input id="videoUrl" type="url" placeholder="https://...mp4"></label>
+        <button class="btn full" id="defaultBg">Use animated gradient</button>
+      </section>
+      <section><h3>Music</h3>
+        <label>Spotify / YouTube URL<input id="mediaUrl" type="url" placeholder="Paste link"></label>
+        <label>Title<input id="mediaTitle" type="text" placeholder="Song / video name"></label>
+        <button class="btn full" id="saveMedia">Save media</button>
+        <p class="hint">A browser page usually cannot read the song playing in another tab. The link/title is therefore saved and shown as the current media.</p>
+      </section>
+      <button class="btn primary full" id="saveSettings">Save settings</button>
+    </div>
+  </aside>
+
+  <div id="resetModal" class="modal hidden">
+    <div class="modal-card glass"><h2>Reset Timer?</h2><p>Your current session progress will be lost.</p><div class="modal-actions"><button id="cancelReset" class="btn">Cancel</button><button id="confirmReset" class="btn primary">Reset</button></div></div>
+  </div>
+
+<script src="app.js"></script>
+</body>
+</html>
